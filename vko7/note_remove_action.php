@@ -1,6 +1,4 @@
 <?php
-    header('Location: noteapp.php');
-
     $servername = "localhost";
     $username = "admin";
     $password = "admin";
@@ -17,7 +15,7 @@
         // set the PDO error mode to exception
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $noteidToRemove = $db->quote($_GET['noteid']);
+        $noteidToRemove = $db->quote($_POST['noteid']);
 
         $sql = ("DELETE FROM `notes`.`notes` WHERE" . $noteidToRemove . "= noteid;");
 

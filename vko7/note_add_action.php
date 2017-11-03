@@ -1,6 +1,4 @@
 <?php
-    //header('Location: noteapp.php');
-
     $servername = "localhost";
     $username = "admin";
     $password = "admin";

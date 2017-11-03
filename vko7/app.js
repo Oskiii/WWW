@@ -3,10 +3,8 @@
 $(document).ready(() => {
     console.log("hi");
 
-    const taskListDiv = $("#note-list-div");
     const taskInputField = $("#new-task-input");
     const taskInputForm = $("#task-input-form");
-    const submitButton = $("#new-task-submit");
     const taskList = $("#task-list");
 
     $("#task-list").load("notelist.php");
@@ -15,13 +13,13 @@ $(document).ready(() => {
         let newTask = taskInputField.val();
         console.log(newTask);
 
-        $.post('notes_action.php', 
+        $.post('note_add_action.php', 
             {
                 note: newTask
             }
         ); 
 
-        $("#task-list").load("notelist.php");
+        taskList.load("notelist.php");
 
         taskInputField.val("");
         event.preventDefault();
@@ -34,4 +32,14 @@ function highlight(element){
 
 function unHighlight(element){
     $(element).removeClass("hover");
+}
+
+function removeListItem(id){
+    $.post('note_remove_action.php', 
+        {
+            noteid: id
+        }
+    ); 
+
+    $("#task-list").load("notelist.php");
 }

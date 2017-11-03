@@ -41,8 +41,8 @@
     function getListNode($id, $text){
         $onmouseover = "highlight(this)";
         $onmouseout = "unHighlight(this)";
-        $onclick = "location.href='note_remove_action.php?noteid=" . $id . "'";
-        $button = "<input id=\"delete-button\" type=\"button\" onclick=\"" . $onclick . "\" value=\" X \" />";
+        $removeAction = "removeListItem(" . $id . ")";
+        $button = "<input id=\"delete-button\" type=\"button\" onclick=\"" . $removeAction . "\" value=\" X \" />";
         
         return "<li class=\"task\" onmouseover=\"" . $onmouseover . "\" onmouseout=\"" . $onmouseout . "\" >" . $text . $button . "</li>";
     }
