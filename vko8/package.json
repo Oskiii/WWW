@@ -6,9 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Oskari Liukku",
   "license": "ISC",
   "devDependencies": {
     "@orange-games/phaser-input": "^2.0.5"
+  },
+  "dependencies": {
+    "phaser": "^2.6.2"
   }
 }
