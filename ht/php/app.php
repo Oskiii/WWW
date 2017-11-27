@@ -5,4 +5,6 @@ define("DB_PASSWORD", "");
 define("DB_PORT", 3306);
 define("DB_DBNAME", "notes");
 
+
+
 ?>
