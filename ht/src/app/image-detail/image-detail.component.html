@@ -1,0 +1,8 @@
+<div *ngIf="image">
+  <h2>{{ image.title | uppercase }} Details</h2>
+  <div><span>id: </span>{{image.id}}</div>
+  <div><span>title: </span>{{image.title}}</div>
+  <img src={{image.path}}>
+  <button (click)="goBack()">go back</button>
+</div>
+

@@ -5,18 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroService } from './hero.service';
+import { ImageDetailComponent } from './image-detail/image-detail.component';
+import { ImageService } from './image.service';
 import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ImgurService } from './imgur.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroDetailComponent,
+    ImageDetailComponent,
     MessagesComponent,
     DashboardComponent
   ],
@@ -26,7 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ HeroService, MessageService ],
+  providers: [ ImageService, MessageService, ImgurService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

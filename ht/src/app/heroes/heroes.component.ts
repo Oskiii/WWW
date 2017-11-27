@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Image } from '../image';
+import { ImageService } from '../image.service';
 
 @Component({
   selector: 'app-heroes',
@@ -10,16 +10,16 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
 
-  heroes: Hero[];
+  images: Image[];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private imageService: ImageService) { }
 
   ngOnInit() {
-    this.getHeroes();
+    this.getImages();
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroes()
-        .subscribe(heroes => this.heroes = heroes);
+  getImages(): void {
+    this.imageService.getImages()
+        .subscribe(images => this.images = images);
   }
 }
