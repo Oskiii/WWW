@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Image } from '../image';
 import { ImageService } from '../image.service';
+import { ImgurService } from '../imgur.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,7 @@ import { ImageService } from '../image.service';
 export class DashboardComponent implements OnInit {
   images: Image[] = [];
 
-  constructor(private imageService: ImageService) { }
+  constructor(private imageService: ImageService, private imgurService: ImgurService) { }
 
   ngOnInit() {
     this.getImages();

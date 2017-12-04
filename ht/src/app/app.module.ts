@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ImgurService } from './imgur.service';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ImageUploadService } from './image-upload.service';
 
 @NgModule({
   declarations: [
@@ -19,15 +21,17 @@ import { ImgurService } from './imgur.service';
     HeroesComponent,
     ImageDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ ImageService, MessageService, ImgurService ],
+  providers: [ ImageService, MessageService, ImageUploadService, ImgurService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

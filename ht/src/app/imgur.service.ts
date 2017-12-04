@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class ImgurService {
 
-  clientId = "95b8af5eefc7da4";
-  clientSecret = "3996b6be9d5b94f3bbbe6bacce8edc199aefe55c";
+  clientId = "faf0d8c05ee6e9f";
+  clientSecret = "f96d5301d8143324d428160d9cfcd3bebc798948";
   accessToken = null;
   apiBase = "https://api.imgur.com/3";
 
   constructor(private http: HttpClient){
+    console.log("asd");
+    this.getAccount("oskiii");
   }
 
   getAccessToken() {
@@ -25,56 +27,6 @@ export class ImgurService {
       var url = this.apiBase + "/account/" + username;
 
       return this._makeRequest(url, "GET");
-  }
-
-  /*
-    * Return the images the user has favorited in the gallery.
-    */
-  getAccountGalleryFavorites(username: string) {
-
-      var url = this.apiBase + "/account/" + username + "/gallery_favorites";
-
-      return this._makeRequest(url, "GET");
-  }
-
-  /*
-    * Returns the users favorited images, only accessible if you're logged in as the user.
-    */
-  getAccountFavorites(username: string) {
-
-      var url = this.apiBase + "/account/" + username + "/favorites";
-
-      return this._makeRequest(url, "GET");
-  }
-
-  /*
-    * Return the images a user has submitted to the gallery
-    */
-  getAccountSubmissions(username) {
-
-      var url = this.apiBase + "/account/" + username + "/submissions";
-
-      return this._makeRequest(url, "GET");
-  }
-
-  /*
-    * Returns the account settings, only accessible if you're logged in as the user.
-    */
-  getAccountSettings(username) {
-
-      var url = this.apiBase + "/account/" + username + "/settings";
-
-      return this._makeRequest(url, "GET");
-  }
-
-  /*
-    * Updates the account settings for a given user, the user must be logged in.
-    */
-  setAccountSettings(username, params) {
-
-      var url = this.apiBase + "/account/" + username + "/settings";
-
-      return this._makeRequest(url, "POST", params);
   }
 
   /*
@@ -96,9 +48,10 @@ export class ImgurService {
     */
   imageUpload(params) {
 
-      var url = this.apiBase + "/image";
+      var url = this.apiBase + "/upload";
+      console.log(params);
 
-      return this._makeRequest(url, "POST", params);
+      return this._makeRequest(url, "POST", new HttpParams().set("image", params.image));
   }
 
   /*
@@ -115,33 +68,36 @@ export class ImgurService {
       return this._makeRequest(galleryEndpoint, "GET");
   }
 
-  /*
-    * Get list of all conversations for the logged in user.
-    */
-  getConversationList() {
-
-      var url = this.apiBase + "/conversations";
-
-      return this._makeRequest(url, "GET");
-  }
-
   /**
    * Executes a request with the given url, method, and optional
    * params and returns a $q promise for the result
    * @param {string} url - the url to access
    * @param {string} method - the http method to use
-   * @param {?object} params - any parameters to pass
+   * @param {?HttpParams} params - any parameters to pass
    * @returns {Promise<object>} a promise for the result
    */
-  _makeRequest(url: string, method: string, params?: object) {
+  _makeRequest(url: string, method: string, params?: HttpParams) {
 
-      if(method === "get")
+    if(method === "GET"){
       this.http.get(
         url,
         {
-          headers: new HttpHeaders()
+          headers: new HttpHeaders().set('Authorization', "Client-ID " + this.clientId),
+          params: params,
         }
-      )
-      
+      ).subscribe(data => {
+        console.log("GET", data);
+      });
+    }else if(method === "POST"){
+      this.http.post(
+        url,
+        {
+          headers: new HttpHeaders().set('Authorization', "Client-ID " + this.clientId),
+          params: params,
+        }
+      ).subscribe(data => {
+        console.log("POST", data);
+      });
+    }
   }
 }
