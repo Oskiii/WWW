@@ -11,9 +11,8 @@ import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ImgurService } from './imgur.service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { ImageUploadService } from './image-upload.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,8 @@ import { ImageUploadService } from './image-upload.service';
     ImageDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +31,7 @@ import { ImageUploadService } from './image-upload.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ ImageService, MessageService, ImageUploadService, ImgurService ],
+  providers: [ ImageService, MessageService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

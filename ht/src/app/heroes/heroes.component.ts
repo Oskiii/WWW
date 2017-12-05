@@ -19,7 +19,7 @@ export class HeroesComponent implements OnInit {
   }
 
   getImages(): void {
-    this.imageService.getImages()
+    this.imageService.getAllImages()
         .subscribe(images => this.images = images);
   }
 }

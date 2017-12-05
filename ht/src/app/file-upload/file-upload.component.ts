@@ -2,7 +2,7 @@
 
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { ImageUploadService } from '../image-upload.service';
+import { ImageService } from '../image.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -16,7 +16,7 @@ export class FileUploadComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private fb: FormBuilder, private uploader: ImageUploadService) {
+  constructor(private fb: FormBuilder, private uploader: ImageService) {
     this.createForm();
   }
 
