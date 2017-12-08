@@ -1,3 +1,14 @@
-<p>
-  register works!
-</p>
+<div class="register">
+    {{diagnostic}}
+    <form>
+        <input type="text" for="firstname" [(ngModel)]="model.firstname" ng-mode name="firstName" placeholder="First name" required><br />
+        <input type="text" for="lastname" [(ngModel)]="model.lastname" name="lastName" placeholder="Last name" required><br />
+        <input type="email" for="email" [(ngModel)]="model.email" name="email" placeholder="Email" required><br />
+        <input type="text" for="username" [(ngModel)]="model.username" name="username" placeholder="Username" required><br />
+        <input type="password" for="password" [(ngModel)]="model.password" name="regPassword" placeholder="Password" required><br />
+        <input type="password" for="password" [(ngModel)]="model.password2" name="regPassword2" placeholder="Re-type password" required><br />
+        <input type="submit" value="Register">
+    </form>
+    
+    <p class="info"></p>
+</div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeroesComponent } from './heroes/heroes.component';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'detail/:id',
     component: ImageDetailComponent
+  },
+  {
+      path: 'register',
+      component: RegisterComponent
   },
   {
     path: '',
