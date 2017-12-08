@@ -1,25 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms/src/directives/ng_model';
+import {Component} from '@angular/core';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 
+import { MaterialModule } from '../material.module';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
+/** @title Input with a custom ErrorStateMatcher */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
-    model = {
-        firstname: "Bob",
-        lastname: "McExample",
-        email: "example@gmail.com",
-        username: "Bobby2",
-        password: "pw",
-    }
-
-    constructor() { }
-
-    ngOnInit() {
-    }
-
-    get diagnostic() { return JSON.stringify(this.model); }
+  matcher = new MyErrorStateMatcher();
 }
