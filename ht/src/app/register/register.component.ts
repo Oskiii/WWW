@@ -86,7 +86,6 @@ export class RegisterComponent implements OnInit {
     ])
 
     doMatch(a, b){
-        console.log(a, b, a === b);
         return a === b;
     }
 
