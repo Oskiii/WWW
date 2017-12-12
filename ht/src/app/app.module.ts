@@ -4,17 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from './material.module';
+import { AppRoutingModule } from './/app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
-import { ImageService } from './image.service';
-import { MessageService } from './message.service';
 import { MessagesComponent } from './messages/messages.component';
-import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { RegisterComponent } from './register/register.component';
+
+import { ImageService } from './image.service';
+import { MessageService } from './message.service';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,7 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     MaterialModule,
   ],
-  providers: [ ImageService, MessageService ],
+  providers: [ ImageService, MessageService, UserService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

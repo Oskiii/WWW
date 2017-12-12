@@ -1,7 +1,34 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
-        <mat-hint>Errors appear instantly!</mat-hint>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+    <mat-form-field>
+        <input matInput name="firstname" placeholder="First name" [formControl]="firstnameFormControl" [(ngModel)]="model.firstname" [errorStateMatcher]="matcher" required />
+        <mat-error *ngIf="firstnameFormControl.hasError('required')">
+            First name is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput name="lastname" placeholder="Last name" [formControl]="lastnameFormControl" [(ngModel)]="model.lastname" [errorStateMatcher]="matcher" required />
+        <mat-error *ngIf="lastnameFormControl.hasError('required')">
+            Last name is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput name="username" placeholder="Username" [formControl]="usernameFormControl" [(ngModel)]="model.username" [errorStateMatcher]="matcher" required />
+        <mat-error *ngIf="(usernameFormControl.hasError('minlength') || usernameFormControl.hasError('maxlength')) && !usernameFormControl.hasError('required')">
+            Username has to be between 3 and 20 characters long.
+        </mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('pattern') && !usernameFormControl.hasError('required')">
+            Username can only contain letters A-Z or numbers 0-9.
+        </mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
+            Username is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput name="email" placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="model.email" [errorStateMatcher]="matcher" required />
         <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
         </mat-error>
@@ -9,5 +36,30 @@
             Email is <strong>required</strong>
         </mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+        <input matInput name="password" type="password" placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="model.password" [errorStateMatcher]="matcher" required />
+        <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
+            Password has to be at least 8 characters long.
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput name="password2" type="password" placeholder="Password again" [formControl]="password2FormControl" [(ngModel)]="model.password2" [errorStateMatcher]="matcher" required />
+        <mat-error *ngIf="doMatch(model.password, model.password2) && !password2FormControl.hasError('required')">
+            Password has to be at least 8 characters long.
+        </mat-error>
+        <mat-error *ngIf="password2FormControl.hasError('required')">
+            Please retype your password.
+        </mat-error>
+    </mat-form-field>
+
+    <p>{{model.password}}</p>
+    <p>{{model.password2}}</p>
+    <p>{{doMatch(model.password, model.password2) && !password2FormControl.hasError('required')}}</p>
+    <button mat-button type="submit">Submit</button>
 </form>
 
