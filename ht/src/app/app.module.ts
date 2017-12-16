@@ -13,6 +13,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 import { ImageService } from './image.service';
 import { MessageService } from './message.service';
@@ -26,7 +27,8 @@ import { UserService } from './user.service';
     MessagesComponent,
     DashboardComponent,
     FileUploadComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

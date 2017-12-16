@@ -1,0 +1,13 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+    <mat-form-field>
+        <input matInput name="username" placeholder="Username" [formControl]="usernameFormControl" [(ngModel)]="model.username" [errorStateMatcher]="matcher" required />
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput name="password" type="password" placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="model.password" [errorStateMatcher]="matcher" required />
+    </mat-form-field>
+
+    <button mat-button type="submit">Submit</button>
+</form>
+

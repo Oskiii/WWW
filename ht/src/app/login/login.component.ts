@@ -3,9 +3,9 @@ import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup} from '@a
 import {ErrorStateMatcher} from '@angular/material/core';
 
 import { UserService } from '../user.service';
-import { UserLoginData } from '../user-login-data';
 
 import { MaterialModule } from '../material.module';
+import { UserLoginData } from '../user-login-data';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -17,11 +17,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
 /** @title Input with a custom ErrorStateMatcher */
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
     registerForm: FormGroup;
     model: UserLoginData = {
@@ -36,11 +36,9 @@ export class RegisterComponent implements OnInit {
     constructor(private userService: UserService) {}
 
     ngOnInit(){
+      this.userService.logout();
+
         this.registerForm = new FormGroup({
-            'email': new FormControl('', [
-                Validators.required,
-                Validators.email,
-            ]),
             'username': new FormControl('', [
                 Validators.required,
                 Validators.pattern(/([a-zA-Z])\w+/),
@@ -54,14 +52,6 @@ export class RegisterComponent implements OnInit {
             ]),
         });
     }
-    
-    firstnameFormControl: FormControl = new FormControl('', [
-    Validators.required,
-    ]);
-
-    lastnameFormControl: FormControl = new FormControl('', [
-    Validators.required,
-    ]);
 
     usernameFormControl: FormControl = new FormControl('', [
     Validators.required,
@@ -70,40 +60,13 @@ export class RegisterComponent implements OnInit {
     Validators.maxLength(20),
     ]);
 
-    emailFormControl: FormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-    ]);
-
     passwordFormControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(/([a-zA-Z])\w+/),
     Validators.minLength(8),
     ]);
 
-    password2FormControl: FormControl = new FormControl('', [
-        Validators.required,
-    ])
-
-    doMatch(a, b){
-        return a === b;
-    }
-
-    matcher = new MyErrorStateMatcher();
-
     onSubmit(){
-        if(this.firstnameFormControl.errors === null &&
-            this.lastnameFormControl.errors === null &&
-            this.emailFormControl.errors === null &&
-            this.usernameFormControl.errors === null &&
-            this.passwordFormControl.errors === null &&
-            this.password2FormControl.errors === null &&
-            this.doMatch(this.model.password, this.model.password2)
-        ){
-            console.log("no errors");
-            this.userService.register(this.model);
-        }else{
-            console.log("errors in form");
-        }
+        this.userService.login(this.model);
     }
 }
