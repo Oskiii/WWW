@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
 
 import { ImageService } from './image.service';
 import { MessageService } from './message.service';
@@ -28,7 +29,8 @@ import { UserService } from './user.service';
     DashboardComponent,
     FileUploadComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    MainNavComponent,
   ],
   imports: [
     BrowserModule,

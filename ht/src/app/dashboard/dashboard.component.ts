@@ -11,17 +11,11 @@ import { UserService } from '../user.service';
 export class DashboardComponent implements OnInit {
   images: Image[] = [];
 
-  currentUser: string;
 
-  constructor(private imageService: ImageService, private userService: UserService) { }
+  constructor(private imageService: ImageService) { }
 
   ngOnInit() {
     this.getImages();
-
-    if(this.userService.loggedInUser){
-      this.currentUser = this.userService.loggedInUser.username;
-      console.log(this.currentUser);
-    }
   }
 
   getImages(): void {

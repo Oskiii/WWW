@@ -3,6 +3,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ImageService } from '../image.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -16,7 +17,7 @@ export class FileUploadComponent implements OnInit {
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private fb: FormBuilder, private uploader: ImageService) {
+  constructor(private fb: FormBuilder, private uploader: ImageService, private userService: UserService) {
     this.createForm();
   }
 
@@ -37,11 +38,14 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  private prepareSave(): any {
+  private prepareSave(): FormData {
     let input = new FormData();
     // This can be done a lot prettier; for example automatically assigning values by looping through `this.form.controls`, but we'll keep it as simple as possible here
     input.append('name', this.form.get('name').value);
     input.append('avatar', this.form.get('avatar').value);
+
+    console.log(this.userService.loggedInUser);
+    input.append('uid', this.userService.loggedInUser.uid.toString());
     return input;
   }
 

@@ -16,7 +16,7 @@ try {
 
     $params = json_decode(file_get_contents('php://input'));
 
-    if(isset($_POST["name"])){
+    if(isset($_POST["name"]) && isset($_POST["uid"])){
 
         $title = $_POST["name"];
 
@@ -24,10 +24,11 @@ try {
         $file_type = $_FILES['avatar']['type'];
         $file_size = $_FILES['avatar']['size'];
         $file_tmp_name = $_FILES['avatar']['tmp_name'];
+        
+        $ownerid = $_POST["uid"];
 
         $timestamp = time();
-        $uid = 1;//$_SESSION["uid"];
-        $folderPath = SAVE_PATH . $uid;
+        $folderPath = SAVE_PATH . $ownerid;
 
         $file_extension = get_file_extension($file_name);
         
@@ -52,7 +53,7 @@ try {
             :f2,
             :f3);");
             
-        $prep->execute(array(":f1"=>$uid, ":f2"=>$title, ":f3"=>$filepath));
+        $prep->execute(array(":f1"=>$ownerid, ":f2"=>$title, ":f3"=>$filepath));
 
         echo json_encode("upload success");
     }

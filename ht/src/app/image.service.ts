@@ -6,7 +6,6 @@ import 'rxjs/add/operator/map'
 import { of } from 'rxjs/observable/of';
 
 import { Image } from './image';
-import { IMAGES } from './mock-images';
 import { MessageService } from './message.service';
 
 @Injectable()
@@ -14,7 +13,7 @@ export class ImageService {
 
   constructor(private messageService: MessageService, private http: HttpClient) { }
 
-  postImage(image: File) {
+  postImage(image: FormData) {
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
 
@@ -49,6 +48,7 @@ export class ImageService {
             img.id = element.imgid;
             img.path = "http://localhost:8888/ht/php/" + element.filepath;
             img.title = element.title;
+            img.owner = { uid: element.uid, username: "pertti" };
             images.push(img);
         });
         return images;
@@ -75,6 +75,7 @@ export class ImageService {
         img.id = element.imgid;
         img.path = "http://localhost:8888/ht/php/" + element.filepath;
         img.title = element.title;
+        img.owner = { uid: element.uid, username: "pertti" };
         return img;
     })
   }

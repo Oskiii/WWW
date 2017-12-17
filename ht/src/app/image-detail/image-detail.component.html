@@ -2,6 +2,8 @@
   <h2>{{ image.title | uppercase }} Details</h2>
   <div><span>id: </span>{{image.id}}</div>
   <div><span>title: </span>{{image.title}}</div>
+  <div><span>ownerid: </span>{{image.owner.uid}}</div>
+  <div><span>ownername: </span>{{image.owner.username}}</div>
   <img src={{image.path}}>
   <button (click)="goBack()">go back</button>
 </div>

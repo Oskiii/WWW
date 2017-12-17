@@ -47,7 +47,7 @@ export class UserService {
     .subscribe((data: any) => {
       console.log(data);
       //this.updateLoggedInUserWith(+data.data.uid, data.data.username);
-      localStorage.setItem('currentUser', JSON.stringify(user));
+      localStorage.setItem('currentUser', JSON.stringify({ uid: +data.data.uid, username: data.data.username}));
     });
   }
 
