@@ -2,7 +2,7 @@
 <h3>Top Images</h3>
 <div class="grid grid-pad">
   <div *ngFor="let image of images" class="col-1-4">
-    <a routerLink="/detail/{{image.id}}">
+    <a routerLink="/image/{{image.id}}">
       <div class="module image">
         <img src={{image.path}}>
         <!-- <h4>{{image.title}}</h4> -->

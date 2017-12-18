@@ -63,14 +63,23 @@ try {
         $id = $params->id;
 
         if($id == -1){
-            $prep = $db->prepare("SELECT * FROM `pictur`.`images`");
+            $prep = $db->prepare(
+                "SELECT * FROM `pictur`.`images` 
+                JOIN `pictur`.`users` 
+                ON (`pictur`.`images`.`uid` = `pictur`.`users`.`uid`)"
+            );
             $prep->execute();
             
             $result = $prep->fetchAll();
             
             echo json_encode($result);
         }else{
-            $prep = $db->prepare("SELECT * FROM `pictur`.`images` WHERE imgid = :f1");
+            $prep = $db->prepare(
+                "SELECT * FROM `pictur`.`images` 
+                JOIN `pictur`.`users` 
+                ON (`pictur`.`images`.`uid` = `pictur`.`users`.`uid`)
+                WHERE imgid = :f1"
+            );
             $prep->execute(array(":f1"=>$id));
             
             $result = $prep->fetchAll();

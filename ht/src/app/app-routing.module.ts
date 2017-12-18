@@ -5,6 +5,7 @@ import { ImageDetailComponent } from './image-detail/image-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 
 const routes: Routes = [
   {
@@ -16,8 +17,12 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'detail/:id',
+    path: 'image/:id',
     component: ImageDetailComponent
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileDetailComponent
   },
   {
       path: 'register',

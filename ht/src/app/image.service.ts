@@ -48,7 +48,7 @@ export class ImageService {
             img.id = element.imgid;
             img.path = "http://localhost:8888/ht/php/" + element.filepath;
             img.title = element.title;
-            img.owner = { uid: element.uid, username: "pertti" };
+            img.owner = { uid: element.uid, username: element.uname };
             images.push(img);
         });
         return images;
@@ -75,7 +75,7 @@ export class ImageService {
         img.id = element.imgid;
         img.path = "http://localhost:8888/ht/php/" + element.filepath;
         img.title = element.title;
-        img.owner = { uid: element.uid, username: "pertti" };
+        img.owner = { uid: element.uid, username: element.uname };
         return img;
     })
   }

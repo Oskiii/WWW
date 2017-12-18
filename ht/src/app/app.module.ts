@@ -15,6 +15,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
+import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 
 import { ImageService } from './image.service';
 import { MessageService } from './message.service';
@@ -31,6 +32,7 @@ import { UserService } from './user.service';
     RegisterComponent,
     LoginComponent,
     MainNavComponent,
+    ProfileDetailComponent,
   ],
   imports: [
     BrowserModule,
