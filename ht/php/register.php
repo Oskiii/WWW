@@ -7,15 +7,7 @@
     require_once("utils.php");
 
     try {
-        $db = new PDO(
-            "mysql".
-            ':host='.DB_SERVERNAME.
-            ';dbname='.DB_DBNAME,
-            DB_USERNAME, 
-            DB_PASSWORD);
-
-        // set the PDO error mode to exception
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = open_db_connection();
 
         $params = json_decode(file_get_contents('php://input'));
 

@@ -7,6 +7,7 @@ import { of } from 'rxjs/observable/of';
 
 import { Image } from './image';
 import { MessageService } from './message.service';
+import { User } from './user';
 
 @Injectable()
 export class ImageService {
@@ -20,6 +21,22 @@ export class ImageService {
     this.http.post(
       "http://localhost:8888/ht/php/file-upload.php",
       (image),
+      {
+        headers: headers,
+      }
+    )
+    .subscribe((data) => {
+      console.log(data);
+    })
+  }
+
+  deleteImage(id: number) {
+    let headers = new HttpHeaders();
+    headers.set("Content-Type", "application/json");
+
+    this.http.post(
+      "http://localhost:8888/ht/php/file-delete.php",
+      { id: id },
       {
         headers: headers,
       }
@@ -48,7 +65,7 @@ export class ImageService {
             img.id = element.imgid;
             img.path = "http://localhost:8888/ht/php/" + element.filepath;
             img.title = element.title;
-            img.owner = { uid: element.uid, username: element.uname };
+            img.owner = element as User;
             images.push(img);
         });
         return images;
@@ -69,13 +86,13 @@ export class ImageService {
       }
     ).map((res: any) => {
         let element = res[0];
-        console.log(element);
-
         let img = new Image();
         img.id = element.imgid;
         img.path = "http://localhost:8888/ht/php/" + element.filepath;
         img.title = element.title;
-        img.owner = { uid: element.uid, username: element.uname };
+        img.owner = element as User;
+
+        console.log(img);
         return img;
     })
   }

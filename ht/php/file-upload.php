@@ -3,19 +3,10 @@ require("utils.php");
 define("SAVE_PATH", "user_images/");
 
 try {
-    $db = new PDO(
-        "mysql".
-        ':host='.DB_SERVERNAME.
-        ':'.DB_PORT.
-        ';dbname='.DB_DBNAME,
-        DB_USERNAME, 
-        DB_PASSWORD);
-
-    // set the PDO error mode to exception
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    $db = open_db_connection();
     $params = json_decode(file_get_contents('php://input'));
 
+    // UPLOAD IMAGE
     if(isset($_POST["name"]) && isset($_POST["uid"])){
 
         $title = $_POST["name"];
@@ -58,7 +49,7 @@ try {
         echo json_encode("upload success");
     }
 
-    //echo json_encode($params->ids);
+    // GET IMAGE(S)
     if(isset($params->id)){
         $id = $params->id;
 

@@ -7,27 +7,8 @@
     require_once("utils.php");
 
     try {
-        $db = new PDO(
-            "mysql".
-            ':host='.DB_SERVERNAME.
-            ';dbname='.DB_DBNAME,
-            DB_USERNAME, 
-            DB_PASSWORD);
-
-        // set the PDO error mode to exception
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        $db = open_db_connection();
         $params = json_decode(file_get_contents('php://input'));
-
-        if(isset($params->loggedInUser) && $params->loggedInUser == "?"){
-            $uid = "-1";
-            $uname = "not found";
-            if(isset($_SESSION["uid"]) && isset($_SESSION["username"])){
-                $uid = $_SESSION["uid"];
-                $uname = $_SESSION["username"];
-            }
-            return json_encode(array("uid"=>$uid, "uname"=>$uname));
-        }
         
         // LOGIN
         if(isset($params->username) && isset($params->password)) {
@@ -38,7 +19,7 @@
                 "data" => ""
             );
             
-            $prep = $db->prepare("SELECT uid, pwhash FROM users WHERE uname = :f1");
+            $prep = $db->prepare("SELECT uid, pwhash FROM users WHERE username = :f1");
             $prep->execute(array(":f1" => $params->username));
             
             $result = $prep->fetchAll();
@@ -62,6 +43,32 @@
             }
             
             echo json_encode($response);
+        }
+
+        // GET USER BY ID
+        if(isset($params->id)){
+            $id = $params->id;
+    
+            if($id == -1){
+                $prep = $db->prepare(
+                    "SELECT * FROM `pictur`.`users`"
+                );
+                $prep->execute();
+                
+                $result = $prep->fetchAll();
+                
+                echo json_encode($result);
+            }else{
+                $prep = $db->prepare(
+                    "SELECT * FROM `pictur`.`users` 
+                    WHERE `uid` = :f1"
+                );
+                $prep->execute(array(":f1"=>$id));
+                
+                $result = $prep->fetchAll();
+                
+                echo json_encode($result);
+            }
         }
     }
     catch(PDOException $e)

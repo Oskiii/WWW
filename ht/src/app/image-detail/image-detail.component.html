@@ -6,6 +6,7 @@
   <div><span>ownername: </span><a routerLink="/profile/{{image.owner.uid}}">{{image.owner.username}}</a></div>
   
   <img src={{image.path}}>
+  <button *ngIf="canDelete" (click)="deleteImg()">delete</button>
   <button (click)="goBack()">go back</button>
 </div>
 

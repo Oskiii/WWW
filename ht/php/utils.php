@@ -28,4 +28,14 @@ function get_file_extension($filename){
 
     return $ext;
 }
+
+function open_db_connection(){
+    return new PDO(
+        "mysql".
+        ':host='.DB_SERVERNAME.
+        ':'.DB_PORT.
+        ';dbname='.DB_DBNAME,
+        DB_USERNAME, 
+        DB_PASSWORD);
+}
 ?>

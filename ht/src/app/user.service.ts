@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map'
+import { of } from 'rxjs/observable/of';
+
 import { User } from './user';
 import { UserLoginData } from './user-login-data';
 
@@ -53,5 +57,26 @@ export class UserService {
 
   logout(){
     localStorage.removeItem('currentUser');
+  }
+
+  getUser(id: number): Observable<User> {
+    let headers = new HttpHeaders();
+    headers.set("Content-Type", "application/json");
+
+    return this.http.post(
+      "http://localhost:8888/ht/php/login.php",
+      {
+        id: id
+      },
+      {
+        //headers: headers,
+      }
+    ).map((res: any) => {
+        let element = res[0];
+        console.log(element);
+
+        let img: User = element as User;
+        return img;
+    })
   }
 }
