@@ -7,6 +7,8 @@ import { UserService } from '../user.service';
 import { MaterialModule } from '../material.module';
 import { UserLoginData } from '../user-login-data';
 
+import { LoginGoogleComponent } from '../login-google/login-google.component';
+
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
 
     registerForm: FormGroup;
     model: UserLoginData = {
+        method: "password",
         firstname: "",
         lastname: "",
         username: "",
@@ -33,26 +36,16 @@ export class LoginComponent implements OnInit {
         password2: "",
     };
 
+    matcher = new MyErrorStateMatcher();
+
     constructor(private userService: UserService) {}
 
     ngOnInit(){
+      // Log out when coming to this screen
       this.userService.logout();
-
-        this.registerForm = new FormGroup({
-            'username': new FormControl('', [
-                Validators.required,
-                Validators.pattern(/([a-zA-Z])\w+/),
-                Validators.minLength(3),
-                Validators.maxLength(20),
-            ]),
-            'password': new FormControl('', [
-                Validators.required,
-                Validators.pattern(/([a-zA-Z])\w+/),
-                Validators.minLength(8),
-            ]),
-        });
     }
 
+    // Validators for the form fields
     usernameFormControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(/^[a-zA-Z0-9]+$/),
@@ -67,6 +60,7 @@ export class LoginComponent implements OnInit {
     ]);
 
     onSubmit(){
-        this.userService.login(this.model);
+        // Submit login data
+        this.userService.loginWithPassword(this.model);
     }
 }

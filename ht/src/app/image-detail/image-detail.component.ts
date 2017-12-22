@@ -27,6 +27,7 @@ export class ImageDetailComponent implements OnInit {
       this.getImage();
     }
     
+    // Get image by route's id and display it
     getImage(): void {
       const id = +this.route.snapshot.paramMap.get('id');
       this.imageService.getImage(id)
@@ -41,6 +42,7 @@ export class ImageDetailComponent implements OnInit {
         });
     }
 
+    // Delete current image
     deleteImg(): void {
       console.log("deleting image: " + this.image.id);
       this.imageService.deleteImage(this.image.id);

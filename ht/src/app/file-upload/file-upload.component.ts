@@ -38,9 +38,9 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
+  // Collect data from form
   private prepareSave(): FormData {
     let input = new FormData();
-    // This can be done a lot prettier; for example automatically assigning values by looping through `this.form.controls`, but we'll keep it as simple as possible here
     input.append('name', this.form.get('name').value);
     input.append('avatar', this.form.get('avatar').value);
 
@@ -49,20 +49,10 @@ export class FileUploadComponent implements OnInit {
     return input;
   }
 
+  // Send form data to service
   onSubmit() {
     const formModel = this.prepareSave();
-    this.loading = true;
-    // In a real-world app you'd have a http request / service call here like
-    // this.http.post('apiUrl', formModel)
-    console.log(formModel);
-
     this.uploader.postImage(formModel);
-    
-    setTimeout(() => {
-      // FormData cannot be inspected (see "Key difference"), hence no need to log it here
-      console.log('done!');
-      this.loading = false;
-    }, 1000);
   }
 
   clearFile() {

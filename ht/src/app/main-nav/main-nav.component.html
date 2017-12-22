@@ -1,5 +1,8 @@
-<p *ngIf="this.userService.loggedInUser">Logged in as: {{currentUser}}</p>
+<p *ngIf="this.userService.loggedInUser">Logged in as: {{this.userService.loggedInUser.username}}</p>
 <nav>
   <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/login">Login</a>
+  <a *ngIf="!this.userService.loggedInUser" routerLink="/login">Login</a>
+  <a *ngIf="!this.userService.loggedInUser" routerLink="/register">Register</a>
+  <a *ngIf="this.userService.loggedInUser" routerLink="/login">Logout</a>
+  
 </nav>

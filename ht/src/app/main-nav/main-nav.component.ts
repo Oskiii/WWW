@@ -9,15 +9,9 @@ import { UserService } from '../user.service';
 })
 export class MainNavComponent implements OnInit {
 
-  currentUser: string;
-
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
-    if(this.userService.loggedInUser){
-      this.currentUser = this.userService.loggedInUser.username;
-      console.log(this.currentUser);
-    }
   }
 
 }

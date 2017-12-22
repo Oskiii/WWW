@@ -14,6 +14,7 @@ export class ImageService {
 
   constructor(private messageService: MessageService, private http: HttpClient) { }
 
+  // Send image data to back-end
   postImage(image: FormData) {
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
@@ -30,6 +31,7 @@ export class ImageService {
     })
   }
 
+  // Delete image of id
   deleteImage(id: number) {
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
@@ -46,6 +48,7 @@ export class ImageService {
     })
   }
 
+  // Get all images from back-end, returns and observable for easy access
   getAllImages(): Observable<Image[]>{
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
@@ -72,6 +75,7 @@ export class ImageService {
     })
   }
 
+  // Get image by id
   getImage(id: number): Observable<Image> {
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");

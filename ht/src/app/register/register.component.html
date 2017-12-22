@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+<form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
 
     <mat-form-field>
         <input matInput name="firstname" placeholder="First name" [formControl]="firstnameFormControl" [(ngModel)]="model.firstname" [errorStateMatcher]="matcher" required />
@@ -57,9 +57,6 @@
         </mat-error>
     </mat-form-field>
 
-    <p>{{model.password}}</p>
-    <p>{{model.password2}}</p>
-    <p>{{doMatch(model.password, model.password2) && !password2FormControl.hasError('required')}}</p>
     <button mat-button type="submit">Submit</button>
 </form>
 

@@ -1,4 +1,5 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+<h2>Login with password</h2>
+<form #f="ngForm" (ngSubmit)="onSubmit()" novalidate>
 
     <mat-form-field>
         <input matInput name="username" placeholder="Username" [formControl]="usernameFormControl" [(ngModel)]="model.username" [errorStateMatcher]="matcher" required />
@@ -11,3 +12,4 @@
     <button mat-button type="submit">Submit</button>
 </form>
 
+<app-login-google></app-login-google>

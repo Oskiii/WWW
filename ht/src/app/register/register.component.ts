@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
     registerForm: FormGroup;
     model: UserLoginData = {
+        method: "password",
         firstname: "",
         lastname: "",
         username: "",
@@ -36,25 +37,9 @@ export class RegisterComponent implements OnInit {
     constructor(private userService: UserService) {}
 
     ngOnInit(){
-        this.registerForm = new FormGroup({
-            'email': new FormControl('', [
-                Validators.required,
-                Validators.email,
-            ]),
-            'username': new FormControl('', [
-                Validators.required,
-                Validators.pattern(/([a-zA-Z])\w+/),
-                Validators.minLength(3),
-                Validators.maxLength(20),
-            ]),
-            'password': new FormControl('', [
-                Validators.required,
-                Validators.pattern(/([a-zA-Z])\w+/),
-                Validators.minLength(8),
-            ]),
-        });
     }
     
+    // Form validators
     firstnameFormControl: FormControl = new FormControl('', [
     Validators.required,
     ]);
@@ -91,6 +76,7 @@ export class RegisterComponent implements OnInit {
 
     matcher = new MyErrorStateMatcher();
 
+    // Submit form if no errors were found
     onSubmit(){
         if(this.firstnameFormControl.errors === null &&
             this.lastnameFormControl.errors === null &&

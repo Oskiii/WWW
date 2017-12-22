@@ -1,4 +1,5 @@
 export class UserLoginData {
+    method: string;
     firstname: string;
     lastname: string;
     username: string;

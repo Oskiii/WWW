@@ -31,10 +31,12 @@ try {
 
         $filepath = $folderPath . "/" . $timestamp . $file_extension;
         
+        // Save file to disk
         if($file_name){
             move_uploaded_file($file_tmp_name, $filepath);
         }
         
+        // Push file data to DB
         $prep = $db->prepare("INSERT INTO `pictur`.`images`
             (`uid`,
             `title`,
@@ -53,6 +55,7 @@ try {
     if(isset($params->id)){
         $id = $params->id;
 
+        // Get all images if id = -1
         if($id == -1){
             $prep = $db->prepare(
                 "SELECT * FROM `pictur`.`images` 
@@ -65,6 +68,7 @@ try {
             
             echo json_encode($result);
         }else{
+            // Get image by id
             $prep = $db->prepare(
                 "SELECT * FROM `pictur`.`images` 
                 JOIN `pictur`.`users` 

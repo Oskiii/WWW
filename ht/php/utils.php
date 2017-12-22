@@ -13,6 +13,8 @@ define("DB_PASSWORD", "root");
 define("DB_PORT", 8889);
 define("DB_DBNAME", "pictur");
 
+define("GOOGLE_CLIENT_ID", "1087314749986-a4m6fqbter0j8248kmapt6ghhrnar1h9.apps.googleusercontent.com");
+
 function get_file_extension($filename){
     $pos = strrpos($filename, '.');
 
@@ -37,5 +39,11 @@ function open_db_connection(){
         ';dbname='.DB_DBNAME,
         DB_USERNAME, 
         DB_PASSWORD);
+}
+
+function p2console( $object=null, $label=null ){ 
+    $message = json_encode($object, JSON_PRETTY_PRINT); 
+    $label = "Debug" . ($label ? " ($label): " : ': '); 
+    echo "<script>console.log(\"$label\", $message);</script>"; 
 }
 ?>

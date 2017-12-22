@@ -11,12 +11,14 @@ import { UserLoginData } from './user-login-data';
 @Injectable()
 export class UserService {
 
-  get loggedInUser(): User{
-    return JSON.parse(localStorage.getItem("currentUser"));
+  public loggedInUser: User;
+
+  // Get logged in user on startup
+  constructor(private http: HttpClient) { 
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  constructor(private http: HttpClient) { }
-
+  // Send register data to back-end
   register(user: UserLoginData){
     console.log(user);
 
@@ -35,9 +37,8 @@ export class UserService {
     })
   }
 
-  login(user: UserLoginData){
-    console.log(user);
-
+  // Send password login data to back-end
+  loginWithPassword(user: UserLoginData){
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
 
@@ -49,16 +50,63 @@ export class UserService {
       }
     )
     .subscribe((data: any) => {
-      console.log(data);
-      //this.updateLoggedInUserWith(+data.data.uid, data.data.username);
-      localStorage.setItem('currentUser', JSON.stringify({ uid: +data.data.uid, username: data.data.username}));
+      // If there was error
+      if(data.error){
+        console.log("Error logging in! Wrong username/pw?");
+        return;
+      }
+
+      // Save logged in user
+      this.loggedInUser = {
+        uid: +data.data.uid,
+        username: data.data.username,
+        firstname: data.data.firstname,
+        lastname: data.data.lastname,
+        email: data.data.email,
+        role: data.data.role,
+      };
+      localStorage.setItem('currentUser', JSON.stringify(this.loggedInUser));
+    });
+  }
+
+  // Send social login data to back-end
+  loginWithSocial(socialType: string, id_token: string){
+    let headers = new HttpHeaders();
+    headers.set("Content-Type", "application/json");
+
+    this.http.post(
+      "http://localhost:8888/ht/php/login.php",
+      (JSON.stringify({method: socialType, id_token: id_token})),
+      {
+        headers: headers,
+      }
+    )
+    .subscribe((data: any) => {
+
+      // If there was error, 
+      if(data.error){
+        console.log("Error logging in!");
+        return;
+      }
+
+      this.loggedInUser = {
+        uid: +data.data.uid,
+        username: data.data.name,
+        firstname: data.data.given_name,
+        lastname: data.data.family_name,
+        email: data.data.email,
+        role: data.data.role,
+      };
+      localStorage.setItem('currentUser', JSON.stringify(this.loggedInUser));
     });
   }
 
   logout(){
     localStorage.removeItem('currentUser');
+    this.loggedInUser = undefined;
   }
 
+  // Get user by id (asyc)
   getUser(id: number): Observable<User> {
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
@@ -73,7 +121,6 @@ export class UserService {
       }
     ).map((res: any) => {
         let element = res[0];
-        console.log(element);
 
         let img: User = element as User;
         return img;

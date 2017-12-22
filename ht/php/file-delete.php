@@ -11,6 +11,7 @@ try {
 
         $id = $params->id;
 
+        // Find image path and delete the file
         $prep = $db->prepare("SELECT `filepath` FROM `images` WHERE `images`.`imgid` = :f1");
         $prep->execute(array(":f1"=>$id));
         $result = $prep->fetchAll();
@@ -21,6 +22,7 @@ try {
             unlink($filepath);
         }
         
+        // Delete the DB record
         $prep = $db->prepare("DELETE FROM `images` WHERE `images`.`imgid` = :f1");
         $prep->execute(array(":f1"=>$id));
 
