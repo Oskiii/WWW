@@ -20,20 +20,18 @@ export class UserService {
 
   // Send register data to back-end
   register(user: UserLoginData){
-    console.log(user);
 
     let headers = new HttpHeaders();
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "http://localhost:8888/ht/php/register.php",
+      "https://oliukku.000webhostapp.com/register.php",
       (JSON.stringify(user)),
       {
         headers: headers,
       }
     )
     .subscribe((data) => {
-      console.log(data);
     })
   }
 
@@ -43,7 +41,7 @@ export class UserService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "http://localhost:8888/ht/php/login.php",
+      "https://oliukku.000webhostapp.com/login.php",
       (JSON.stringify(user)),
       {
         headers: headers,
@@ -75,7 +73,7 @@ export class UserService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "http://localhost:8888/ht/php/login.php",
+      "https://oliukku.000webhostapp.com/login.php",
       (JSON.stringify({method: socialType, id_token: id_token})),
       {
         headers: headers,
@@ -112,7 +110,7 @@ export class UserService {
     headers.set("Content-Type", "application/json");
 
     return this.http.post(
-      "http://localhost:8888/ht/php/login.php",
+      "https://oliukku.000webhostapp.com/login.php",
       {
         id: id
       },

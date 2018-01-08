@@ -20,7 +20,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "http://localhost:8888/ht/php/file-upload.php",
+      "https://oliukku.000webhostapp.com/file-upload.php",
       (image),
       {
         headers: headers,
@@ -28,6 +28,7 @@ export class ImageService {
     )
     .subscribe((data) => {
       console.log(data);
+      location.reload();
     })
   }
 
@@ -37,7 +38,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "http://localhost:8888/ht/php/file-delete.php",
+      "https://oliukku.000webhostapp.com/file-delete.php",
       { id: id },
       {
         headers: headers,
@@ -54,7 +55,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     return this.http.post(
-      "http://localhost:8888/ht/php/file-upload.php",
+      "https://oliukku.000webhostapp.com/file-upload.php",
       {
         id: -1
       },
@@ -66,7 +67,7 @@ export class ImageService {
         res.forEach(element => {
             let img = new Image();
             img.id = element.imgid;
-            img.path = "http://localhost:8888/ht/php/" + element.filepath;
+            img.path = "https://oliukku.000webhostapp.com/" + element.filepath;
             img.title = element.title;
             img.owner = element as User;
             images.push(img);
@@ -81,7 +82,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     return this.http.post(
-      "http://localhost:8888/ht/php/file-upload.php",
+      "https://oliukku.000webhostapp.com/file-upload.php",
       {
         id: id
       },
@@ -92,7 +93,7 @@ export class ImageService {
         let element = res[0];
         let img = new Image();
         img.id = element.imgid;
-        img.path = "http://localhost:8888/ht/php/" + element.filepath;
+        img.path = "https://oliukku.000webhostapp.com/" + element.filepath;
         img.title = element.title;
         img.owner = element as User;
 

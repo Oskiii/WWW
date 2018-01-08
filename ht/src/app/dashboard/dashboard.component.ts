@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   images: Image[] = [];
 
 
-  constructor(private imageService: ImageService) { }
+  constructor(public userService: UserService, private imageService: ImageService) { }
 
   ngOnInit() {
     this.getImages();

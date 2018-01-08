@@ -21,7 +21,6 @@ export class LoginGoogleComponent implements OnInit {
   signIn(provider){
     this.sub = this._auth.login(provider).subscribe(
       (data: any) => {
-        console.log(data);
         this.user=data;
         this.userService.loginWithSocial(provider, data.idToken);
       }
