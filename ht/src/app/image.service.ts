@@ -20,7 +20,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "https://oliukku.000webhostapp.com/file-upload.php",
+      "http://localhost:8888/ht/php/file-upload.php",
       (image),
       {
         headers: headers,
@@ -38,7 +38,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "https://oliukku.000webhostapp.com/file-delete.php",
+      "http://localhost:8888/ht/php/file-delete.php",
       { id: id },
       {
         headers: headers,
@@ -55,7 +55,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     return this.http.post(
-      "https://oliukku.000webhostapp.com/file-upload.php",
+      "http://localhost:8888/ht/php/file-upload.php",
       {
         id: -1
       },
@@ -67,7 +67,7 @@ export class ImageService {
         res.forEach(element => {
             let img = new Image();
             img.id = element.imgid;
-            img.path = "https://oliukku.000webhostapp.com/" + element.filepath;
+            img.path = "http://localhost:8888/ht/php/" + element.filepath;
             img.title = element.title;
             img.owner = element as User;
             images.push(img);
@@ -82,7 +82,7 @@ export class ImageService {
     headers.set("Content-Type", "application/json");
 
     return this.http.post(
-      "https://oliukku.000webhostapp.com/file-upload.php",
+      "http://localhost:8888/ht/php/file-upload.php",
       {
         id: id
       },
@@ -93,7 +93,7 @@ export class ImageService {
         let element = res[0];
         let img = new Image();
         img.id = element.imgid;
-        img.path = "https://oliukku.000webhostapp.com/" + element.filepath;
+        img.path = "http://localhost:8888/ht/php/" + element.filepath;
         img.title = element.title;
         img.owner = element as User;
 

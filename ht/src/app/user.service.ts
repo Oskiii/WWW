@@ -25,7 +25,7 @@ export class UserService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "https://oliukku.000webhostapp.com/register.php",
+      "http://localhost:8888/ht/php/register.php",
       (JSON.stringify(user)),
       {
         headers: headers,
@@ -41,7 +41,7 @@ export class UserService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "https://oliukku.000webhostapp.com/login.php",
+      "http://localhost:8888/ht/php/login.php",
       (JSON.stringify(user)),
       {
         headers: headers,
@@ -73,7 +73,7 @@ export class UserService {
     headers.set("Content-Type", "application/json");
 
     this.http.post(
-      "https://oliukku.000webhostapp.com/login.php",
+      "http://localhost:8888/ht/php/login.php",
       (JSON.stringify({method: socialType, id_token: id_token})),
       {
         headers: headers,
@@ -110,7 +110,7 @@ export class UserService {
     headers.set("Content-Type", "application/json");
 
     return this.http.post(
-      "https://oliukku.000webhostapp.com/login.php",
+      "http://localhost:8888/ht/php/login.php",
       {
         id: id
       },

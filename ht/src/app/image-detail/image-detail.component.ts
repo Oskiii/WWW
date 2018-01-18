@@ -34,11 +34,12 @@ export class ImageDetailComponent implements OnInit {
         .subscribe(hero => {
           this.image = hero;
 
-          console.log(this.userService.loggedInUser.uid, this.image.owner.uid);
+          console.log(this.userService.loggedInUser, this.image.owner);
           
           this.canDelete = 
-          (this.userService.loggedInUser.uid == this.image.owner.uid) 
-          || this.userService.loggedInUser.role === "admin";
+          this.userService.loggedInUser
+          && ((this.userService.loggedInUser.uid == this.image.owner.uid) 
+          || this.userService.loggedInUser.role === "admin");
         });
     }
 
